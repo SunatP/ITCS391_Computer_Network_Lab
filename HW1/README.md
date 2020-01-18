@@ -130,6 +130,8 @@
     7.4 ต่อสายจาก SW2(Switch 2) ช่อง FastEthernet0/1 ไปที่ PC-2 ที่ช่อง FastEthernet0
 ```
 
+![1](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/1.PNG)
+
 ### Part 2: Configure Devices
 
 Record the PC addressing and gateway addresses in the addressing table. You can use any available address in the network for PC-1 and PC-2.
@@ -167,43 +169,63 @@ Would you like to enter the initial configuration dialog? [yes/no]: n
 
 Press RETURN to get started!
 ```
+
 ตรงนี้เราจะกด Enter เพื่อเริ่มทำการตั้งค่า
+
 ```bash
 Router> # มันจะขึ้นแบบนี้มา
 ```
+
 จากนั้นพิมพ์ **enable** แล้วกด enter
 ```bash
 Router>enable 
 ```
+
 จะได้แบบนี้
+
 ```C++
 Router#     // ตอนแรกจะเป็น Router> แบบนี้
 ```
+![2](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/2.PNG)
+
 เราจะเริ่มทำการตั้งค่า ให้กับ Router ก่อนโดยใช้คำสั่งเปิด config t ก่อน
+
 ```C
 Router#config t // แล้วกด enter จะได้แบบนี้
 // แบบข้างล่างนี้
 Enter configuration commands, one per line.  End with CNTL/Z.
 Router(config)#
 ```
+
+![3](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/3.PNG)
+
 จากนั้นใช้คำสั่ง hostname RTA เพื่อตั้งชื่อ Router (RTA คือชื่อที่ทางแลปให้ตั้ง)
+
 ```C
 Router(config)#hostname RTA
 // จะได้แบบนี้
 RTA(config)#
 ```
+
 จะสังเกตได้ว่า Router(config) ได้เปลี่ยนเป็น RTA(config) เรียบร้อยแล้ว
+
+![4](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/4.PNG)
 
 ต่อมาเราจะตั้งรหัสผ่านให้กับตัว Router แบบ encrypt โดยรหัสผ่านนี้คือ **Ciscoenpa55** โดยวิธีตั้งคือ
 
 ```c
 RTA(config)#enable secret Ciscoenpa55 // แล้วกด enter ไป router จะทำการจำรหัสผ่านไว้แล้ว
 ```
+
+![5](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/5.PNG)
+
 ต่อมาเราจะต้องตั้งรหัสผ่านสำหรับ line console เพื่อกันคนภายนอกเข้ามแก้ไขโดยใช้คำสั่งแบบนี้
+
 ```c
 RTA(config)#line console 0 // แล้วกด enter จะได้แบบนี้
 RTA(config-line)#
 ```
+
 จากนั้นใช้คำสั่ง **password** ตามด้วยรหัสผ่านคือ **Ciscolinepa55** แล้วกด enter
 
 ```c
@@ -211,13 +233,20 @@ RTA(config-line)#password Ciscolinepa55
 // จากนั้นใส่คำสั่ง login เข้าไปเพื่อเปิดการใช้รหัสผ่าน
 RTA(config-line)#login
 ```
+
+![6](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/6.PNG)
+
 ระบบจะจดจำรหัสผ่านเรียบร้อย จากนั้นกด CTRL+Z เพื่อกลับไปหน้าหลักของ Router
+
 ```C
 RTA(config-line)#^Z
 RTA#
 %SYS-5-CONFIG_I: Configured from console by console
 RTA# 
 ```
+
+![7](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/7.PNG)
+
 ตรงนี้เราจะต้องตั้งค่า Banning หรือข้อความต้อนรับสำหรับผู้ที่เข้ามาตั้งค่าโดยใช้คำสั่ง
 
 ```C
@@ -229,6 +258,8 @@ Enter TEXT message.  End with the character '!'.
 ## Welcome to Cisco Router ## // พิมพ์ประมาณนี้หรือแบบอื่นก็ได้แล้วกด enter
 ! // จากนั้นใช้เครื่องหมายตกใจหรืออัศเจรีย์แล้วกด Enter เพื่อจบการทำงาน
 ```
+
+![8](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/8.PNG)
 
 ต่อมาเราจะตั้งค่า Router ให้สามารถจ่าย IP Address ให้กับ GigabitEthernet port ทั้ง 2 โดยเริ่มที่ช่อง GigabitEthernet0/0 ก่อน โดยใช้คำสั่ง 
 ```c
@@ -242,8 +273,14 @@ RTA(config-if)#
 %LINEPROTO-5-UPDOWN: Line protocol on Interface GigabitEthernet0/0, changed state to up
 
 RTA(config-if)#
+
 ```
+
+![9](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/9.PNG)
+
 จากนั้นทำแบบนี้เช่นเดียวกับ GigabitEthernet0/1 แต่เปลี่ยน IP Address เป็น 10.10.20.1
+
+
 ```c
 RTA(config)#interface G0/1
 RTA(config-if)#ip address 10.10.20.1 255.255.255.0
@@ -261,7 +298,11 @@ RTA(config-if)#description GigabitLan // เราจะตั้งคำอธ
 RTA(config-if)#
 ```
 
+![10](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/10.PNG)
+
 จากนั้นเราจะทำการ backup configuration ของ Router ตัวนี้ไว้โดยใช้คำสั่ง
+
+
 ```C
 RTA(config-if)#^Z // ตรงนี้กด CTRL + Z เพื่อออกมา
 RTA#
@@ -274,6 +315,8 @@ Building configuration...
 RTA#
 ```
 
+![11](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/11.PNG)
+
 จากนั้นเราจะตั้งรหัสผ่านให้กับ VTY port อีกทีโดยใช้คำสั่ง
 ```c
 RTA#conf t
@@ -282,6 +325,8 @@ RTA(config-line)#password Ciscolinepa55
 RTA(config-line)#login
 RTA(config-line)#
 ```
+
+![12](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/12.PNG)
 
 จากนั้นกดปิดหน้าต่าง setup(CLI) ไปได้เลย
 
@@ -304,6 +349,8 @@ Switch(config-line)#password Ciscolinepa55
 Switch(config-line)#login
 Switch(config-line)#
 ```
+
+![13](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/13.PNG)
 
 จากนั้นกลับมาที่หน้าหลักโดยใช้ CTRL + Z 
 ```c
