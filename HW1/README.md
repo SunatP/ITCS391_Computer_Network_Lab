@@ -350,7 +350,7 @@ Switch(config-line)#login
 Switch(config-line)#
 ```
 
-![13](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/13.PNG)
+![13  ](https://raw.githubusercontent.com/SunatP/ITCS391_Computer_Network_Lab/master/HW1/img/13.PNG)
 
 จากนั้นกลับมาที่หน้าหลักโดยใช้ CTRL + Z 
 ```c
